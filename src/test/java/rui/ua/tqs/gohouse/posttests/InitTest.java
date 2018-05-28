@@ -24,7 +24,7 @@ public class InitTest {
     
     private WebDriver driver;
     private String baseUrl;
-    private static final String DRIVER_PATH = "/home/r.jesus"; 
+    private static final String DRIVER_PATH = "/home/r.jesus/chromedriver"; 
     
     @Before
     public void setUp() throws Exception {
