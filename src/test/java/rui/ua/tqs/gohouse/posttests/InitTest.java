@@ -24,13 +24,13 @@ public class InitTest {
     
     private WebDriver driver;
     private String baseUrl;
-    private static final String DRIVERR_PATH = "/home/r.jesus"; 
+    private static final String DRIVER_PATH = "/home/r.jesus"; 
     
     @Before
     public void setUp() throws Exception {
         //Este path é o da VM !!!! 
         //Pra testar localmente trocar para o path onde têm o vosso download do chrome driver
-        System.setProperty("webdriver.chrome.driver", "/home/rui/Documents/TQS/chromedriver"); 
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH); 
         
         ChromeOptions options = new ChromeOptions();
         
