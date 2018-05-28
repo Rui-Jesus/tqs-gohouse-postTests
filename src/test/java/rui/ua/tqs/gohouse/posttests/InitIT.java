@@ -5,11 +5,15 @@
  */
 package rui.ua.tqs.gohouse.posttests;
 
+import java.util.concurrent.TimeUnit;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  *
@@ -17,15 +21,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class InitIT {
     
+    private WebDriver driver;
+    private String baseUrl;
+    
+    @Before
+    public void setUp() throws Exception {
+        //Este path é o da VM !!!! 
+        //Pra testar localmente trocar para o path onde têm o vosso download do chrome driver
+        System.setProperty("webdriver.chrome.driver", "/home/r.jesus");  
+        driver = new ChromeDriver();
+        baseUrl = "http://www.netbeans.org";
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+    
     @Test
     public void testSimple() throws Exception {
-        // Create a new instance of the Firefox driver
-        // Notice that the remainder of the code relies on the interface, 
-        // not the implementation.
-        WebDriver driver = new FirefoxDriver();
-
+        
+        System.out.println("It's working"); 
+        
         // And now use this to visit NetBeans
-        driver.get("http://www.netbeans.org");
+        driver.get(baseUrl);
         // Alternatively the same thing can be done like this
         // driver.navigate().to("http://www.netbeans.org");
 
