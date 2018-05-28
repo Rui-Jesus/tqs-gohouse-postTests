@@ -14,22 +14,31 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  *
  * @author rui
  */
-public class InitIT {
+public class InitTest {
     
     private WebDriver driver;
     private String baseUrl;
+    private static final String DRIVERR_PATH = "/home/r.jesus"; 
     
     @Before
     public void setUp() throws Exception {
         //Este path é o da VM !!!! 
         //Pra testar localmente trocar para o path onde têm o vosso download do chrome driver
-        System.setProperty("webdriver.chrome.driver", "/home/r.jesus");  
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "/home/rui/Documents/TQS/chromedriver"); 
+        
+        ChromeOptions options = new ChromeOptions();
+        
+        // setting headless mode to true.. so there isn't any ui
+        options.setHeadless(true);
+
+        // Create a new instance of the Chrome driver
+        driver = new ChromeDriver(options);
         baseUrl = "http://www.netbeans.org";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
