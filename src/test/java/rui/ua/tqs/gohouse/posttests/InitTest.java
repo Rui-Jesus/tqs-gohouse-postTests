@@ -26,8 +26,10 @@ public class InitTest {
 
     private WebDriver driver;
     private String baseUrl;
-    private static final String DRIVER_PATH = "/home/r.jesus/chromedriver"; 
-    
+    private static final String DRIVER_PATH = "/home/r.jesus/chromedriver";
+    private boolean acceptNextAlert = true;
+    private StringBuffer verificationErrors = new StringBuffer();
+
     @Before
     public void setUp() throws Exception {
         //Este path é o da VM !!!! 
