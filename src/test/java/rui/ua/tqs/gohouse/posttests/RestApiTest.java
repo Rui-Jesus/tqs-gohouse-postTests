@@ -97,14 +97,14 @@ public class RestApiTest {
     public void testPOSTDummyUser(){
         OkHttpClient client = new OkHttpClient();
 
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        RequestBody body = RequestBody.create(mediaType, "email=dummyMan%40dummy.dum&name=Dummy&password=dummy123&isDelegate=false");
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "{\n\t\"email\" : \"asdf\",\n\t\"password\" : \"aaa\",\n\t\"isDelegate\" : \"true\",\n\t\"name\" : \"Bill\"\n}");
         Request request = new Request.Builder()
           .url(URLPath + "/users")
           .post(body)
-          .addHeader("content-type", "application/x-www-form-urlencoded")
+          .addHeader("content-type", "application/json")
           .addHeader("cache-control", "no-cache")
-          .addHeader("postman-token", "cddf08b3-a7d1-cd40-1676-97fe5dbc991b")
+          .addHeader("postman-token", "3d9b96a6-6de0-aa88-4655-911358ab257a")
           .build();
 
         Response response;
@@ -121,7 +121,6 @@ public class RestApiTest {
     public void testGetUserByEmailReturnsAnything(){
         try {
             OkHttpClient client = new OkHttpClient();
-            
             Request request = new Request.Builder()
                     .url(URLPath + "/users/dummyMan@dummy.dum")
                     .get()
@@ -161,23 +160,23 @@ public class RestApiTest {
     
     @Test
     public void testRatePropertyWorks(){
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "{\n\t\"delegate\" :1,\n\t\"id\" : 1,\n\t\"rate\" : 2\n}");
+        Request request = new Request.Builder()
+          .url("http://localhost:8080/tqs-gohouse-1.0-SNAPSHOT/REST/properties/rate")
+          .post(body)
+          .addHeader("content-type", "application/json")
+          .addHeader("cache-control", "no-cache")
+          .addHeader("postman-token", "0f726959-9e9f-bfe0-687c-811118a60238")
+          .build();
+
+        Response response;
         try {
-            OkHttpClient client = new OkHttpClient();
-            
-            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "userID=3&rate=3");
-            Request request = new Request.Builder()
-                    .url(URLPath +"/properties/rate")
-                    .post(body)
-                    .addHeader("content-type", "application/x-www-form-urlencoded")
-                    .addHeader("cache-control", "no-cache")
-                    .addHeader("postman-token", "77be911e-2ede-c42d-1501-4f0e1fb655f8")
-                    .build();
-            
-            Response response = client.newCall(request).execute();
-            
+            response = client.newCall(request).execute();  
             System.out.println("Resultado: " + response.body().string());
-            assertTrue("Deverá dar o OK...",response.isSuccessful());
+            assertTrue("testRatePropertyWorks",response.isSuccessful());
         } catch (IOException ex) {
             Logger.getLogger(RestApiTest.class.getName()).log(Level.SEVERE, null, ex);
         }
